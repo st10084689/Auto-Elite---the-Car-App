@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_grey">#848488</color>
+    <color name="grey">#515156</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Spinner_color">#F4F3F3</color>
+    <color name="car_screen_color">#9971EC</color>
+    <color name="motorbike_screen_color">#EC7171</color>
+    <color name="bike_screen_color">#A2FE46</color>
+    <color name="accessories_screen_color">#FFD25E</color>
+    <color name="car_secondary_color">#39203D</color>
+    <color name="motorbike_secondary_color">#F50C0C</color>
+    <color name="bike_secondary_color">#3A7103</color>
+    <color name="accessories_secondary_color">#E9A800</color>
+    <color name="spinner_color">#565656</color>
+</resources>

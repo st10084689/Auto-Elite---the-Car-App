@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.CarFragment">
+
+    <RelativeLayout
+        android:background="@drawable/custom_spinner"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="27dp"
+        android:id="@+id/carBrandBtn"
+        android:layout_marginTop="33dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <TextView
+            android:id="@+id/CarBrandTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sora_font_family"
+            android:text="Car Brand"
+            android:textColor="@color/spinner_color"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@+id/typeAndYearRelative"
+        android:layout_below="@+id/carBrandBtn"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        >
+
+        <Spinner
+            android:id="@+id/typeBrandSpinner"
+            android:entries="@array/type_array"
+            android:background="@drawable/custom_spinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="9dp"
+            android:text="Type"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/sora_font_family"
+            android:textColor="@color/spinner_color"
+            android:spinnerMode="dropdown"
+            android:layout_height="45dp"/>
+
+        <RelativeLayout
+            android:id="@+id/yearBrandSpinner"
+            android:background="@drawable/custom_spinner"
+            android:layout_toRightOf="@id/typeBrandSpinner"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/sora_font_family"
+                android:text="@string/Year"
+                android:textColor="@color/spinner_color"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Spinner
+        android:background="@drawable/custom_spinner"
+        android:id="@+id/mileageBrandSpinner"
+        android:layout_below="@+id/typeAndYearRelative"
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="27dp"
+        android:layout_height="45dp"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/priceBrandSpinner"
+        android:background="@drawable/custom_spinner"
+        android:layout_below="@+id/mileageBrandSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="6dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:fontFamily="@font/sora_font_family"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/showMoreId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:textSize="15sp"
+        android:textColor="@color/car_screen_color"
+        android:layout_below="@id/priceBrandSpinner"
+        android:text="@string/Show_More"
+        android:fontFamily="@font/sora_font_family"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="44dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/SearchBtn"
+        android:background="@drawable/car_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/showMoreId"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Search"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/sora_font_family"/>
+
+
+
+
+</RelativeLayout>

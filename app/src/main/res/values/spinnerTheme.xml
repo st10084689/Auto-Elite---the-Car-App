@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="spinnerTheme" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/sora_font_family</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+</resources>

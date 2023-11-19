@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources> <!-- Base application theme. -->
+    <style name="Base.Theme.AutoElite.second" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+
+    <style name="Theme.AutoElite.second" parent="Base.Theme.AutoElite.second" />
+</resources>

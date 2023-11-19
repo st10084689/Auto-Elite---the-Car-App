@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mileage_array">
+        <item>mileage</item>
+        <item>200 000kms+</item>
+        <item>199 999kms To 150 000kms</item>
+        <item>149 999kms To 100 000kms</item>
+        <item>99 999kms To 50 000kms</item>
+        <item>49 999kms To 10 000kms</item>
+        <item>99999kms To 0</item>
+    </string-array>
+</resources>
