@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AutoEliteKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".view.CarBrandSelection"
+            android:exported="false" />
+        <activity
             android:name=".view.VehicleList"
             android:exported="false" />
         <activity

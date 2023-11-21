@@ -28,7 +28,6 @@ class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val model = cars[position]
-        var isExpand = MakeAndModelViewModel().getIsExpandable(position)
 
 
         // Set the text for CarBrand TextView
@@ -36,7 +35,7 @@ class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
 
         // Handle checkbox click listener to expand/collapse the item
         holder.checkbox.setOnCheckedChangeListener(null)
-        holder.checkbox.isChecked = isExpand
+        holder.checkbox.isChecked =  MakeAndModelViewModel().IsExpandable(position)
 
         holder.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -54,11 +53,11 @@ class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
             }
         }
 
-        val isExpandable = isExpand
+        var isExpandable =  MakeAndModelViewModel().IsExpandable(position)
         holder.nestedRecycler.visibility =
             if (isExpandable && expandedPosition == position) View.VISIBLE else View.GONE
 
-        val adapter = SelectedModelNestedRecyclerAdapter(model.model)
+        val adapter = SelectedModelNestedRecyclerAdapter(model.name,model.model)
         holder.nestedRecycler.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.nestedRecycler.setHasFixedSize(true)
         holder.nestedRecycler.adapter = adapter
@@ -75,7 +74,7 @@ class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
                 // Clicking on the expanded item again will collapse it
                 expandedPosition = -1
             }
-            isExpand = expandedPosition == position
+            isExpandable = expandedPosition == position
             notifyItemChanged(position)
         }
     }
