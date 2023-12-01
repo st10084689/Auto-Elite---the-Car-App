@@ -34,6 +34,7 @@ class MakeAndModel : AppCompatActivity() {
 
         viewModel.setCarBrand(object : CarBrandCallback {
             override fun onCarBrandLoaded(carBrands: List<CarBrand>) {
+
                 val adapter = SelectBrandRecyclerAdapter(carBrands)
 
                 selectedCarRecycler.adapter = adapter

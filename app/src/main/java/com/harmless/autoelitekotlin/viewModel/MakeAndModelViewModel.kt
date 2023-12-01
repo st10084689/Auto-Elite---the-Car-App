@@ -1,5 +1,6 @@
 package com.harmless.autoelitekotlin.viewModel
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,7 +17,6 @@ class MakeAndModelViewModel {
 
         private var carBrands = mutableListOf<CarBrand>()
 
-     private var isExpandable = false
 
         fun setCarBrand(callback: CarBrandCallback) {
             val carsReference = FirebaseDatabase.getInstance().getReference("carRecycler").child("brands")
@@ -27,6 +27,11 @@ class MakeAndModelViewModel {
                         val carBrand = carSnapshot.getValue(CarBrand::class.java)
                         if (carBrand != null) {
                             carBrands.add(carBrand)
+//                            for (items in carBrands.indices)
+//                                for(model in carBrands[items].model!!){
+//                                    Log.d(TAG, "onDataChange: "+ carBrands[items].model!!)
+//                                }
+//
                         }
                     }
                     callback.onCarBrandLoaded(carBrands)
@@ -43,13 +48,17 @@ class MakeAndModelViewModel {
             return carBrands
         }
 
-
-    fun IsExpandable(position:Int):Boolean{
-        return isExpandable
+    fun isExpandable(carsBrandList: List<String>): Boolean {
+        if(carsBrandList != null){
+            return !carsBrandList.isEmpty()
+        }
+        else{
+            return false
+        }
     }
 
-    fun setExpandable(expandable: Boolean) {
-        isExpandable = expandable
+    interface OnNestedItemClickListner{
+        fun onNestItemClicked(position:Int, isChecked: Boolean)
     }
 
 

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AutoEliteKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".view.PriceSelection"
+            android:exported="false" />
+        <activity
+            android:name=".view.YearSelection"
+            android:exported="false" />
+        <activity
             android:name=".view.CarBrandSelection"
             android:exported="false" />
         <activity

@@ -1,5 +1,6 @@
 package com.harmless.autoelitekotlin.view.recyclerViews
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,11 @@ import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.Utility
 import com.harmless.autoelitekotlin.view.MakeAndModel
 
-private const val TAG = "SelectedModelNestedRecy"
-class SelectedModelNestedRecyclerAdapter(private val carBrand : String?, private val carModels : MutableList<String>?) :
+private const val TAG = "SelectedModelNestedRecyclerAdapter"
+class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private val carModels : List<String>,private val mainPostion:Int) :
     RecyclerView.Adapter<SelectedModelNestedRecyclerAdapter.ItemHolder>() {
 
-    private val TAG = "NestedCarSelectionAdapter"
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.model_card, parent, false)
@@ -24,7 +25,7 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String?, private
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        val model = carModels?.get(position)
+        val model = carModels!!.get(position)
         holder.modelText.text = model
 
 
@@ -32,7 +33,19 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String?, private
             val isChecked = (it as CheckBox).isChecked
 
             if (isChecked) {
-             addValueToKey(Utility.selectedCarBrands, carBrand!!, carModels!![position])
+                Log.d(TAG, "onBindViewHolder modelCheck: entered ")
+
+
+             addValueToKey(carBrand, model)
+
+                for (item in Utility.carBrandsSelected){
+                    Log.d(TAG, "onBindViewHolder: ${item.name}")
+                    for (i in item.models!!){
+                    Log.d(TAG, "onBindViewHolder: $i")
+                }}
+
+
+
             } else {
 
             }
@@ -46,15 +59,14 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String?, private
         return 0
     }
 
-    fun addValueToKey(map: MutableMap<String, MutableList<String>>, key: String, value: String) {
-        val existingValues = map[key]
+    fun addValueToKey(name: String, model: String) {
+        val existingBrand = Utility.carBrandsSelected.find { it.name == name }
 
-        if (existingValues != null) {
-            // Key exists, add value to the existing list
-            existingValues.add(value)
+        if (existingBrand != null) {
+            existingBrand.models!!.add(model)
         } else {
-            // Key does not exist, create a new key with a list containing the value
-            map[key] = mutableListOf(value)
+            val newBrand = CarBrand(mutableListOf(model), name)
+            Utility.carBrandsSelected.add(newBrand)
         }
     }
 

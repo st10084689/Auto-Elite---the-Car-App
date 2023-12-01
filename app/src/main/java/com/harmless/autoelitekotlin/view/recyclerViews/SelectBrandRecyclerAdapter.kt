@@ -1,5 +1,6 @@
 package com.harmless.autoelitekotlin.view.recyclerViews
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +14,14 @@ import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.view.MakeAndModel
 import com.harmless.autoelitekotlin.viewModel.MakeAndModelViewModel
+import com.harmless.autoelitekotlin.viewModel.TAG
 
 class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
     RecyclerView.Adapter<SelectBrandRecyclerAdapter.ItemViewHolder>() {
 
+    private var previousExpanded = -1
+    private var expanded = -1
 
-
-    private var expandedPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.make_card, parent, false)
@@ -28,56 +30,47 @@ class SelectBrandRecyclerAdapter(private val cars: List<CarBrand>) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val model = cars[position]
+        model.isExpandable = true
 
+        holder.nestedRecycler.visibility = View.GONE//setting teh recycler to be normally Gone
+        model.isExpandable = MakeAndModelViewModel().isExpandable(model.models)
 
-        // Set the text for CarBrand TextView
-        holder.carBrand.text= model.name
+        holder.carBrand.text = model.name
 
-        // Handle checkbox click listener to expand/collapse the item
-        holder.checkbox.setOnCheckedChangeListener(null)
-        holder.checkbox.isChecked =  MakeAndModelViewModel().IsExpandable(position)
-
-        holder.checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                // Expand the item and set it as the expanded position
-                val previouslyExpandedPosition = expandedPosition
-                expandedPosition = position
-                if (previouslyExpandedPosition != -1) {
-                    notifyItemChanged(previouslyExpandedPosition)
-                }
-                holder.nestedRecycler.visibility = View.VISIBLE
-            } else {
-                // Collapse the item and reset the expanded position
-                expandedPosition = -1
-                holder.nestedRecycler.visibility = View.GONE
-            }
-        }
-
-        var isExpandable =  MakeAndModelViewModel().IsExpandable(position)
-        holder.nestedRecycler.visibility =
-            if (isExpandable && expandedPosition == position) View.VISIBLE else View.GONE
-
-        val adapter = SelectedModelNestedRecyclerAdapter(model.name,model.model)
+        val adapter = SelectedModelNestedRecyclerAdapter(model.name, model.models,position)
         holder.nestedRecycler.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.nestedRecycler.setHasFixedSize(true)
         holder.nestedRecycler.adapter = adapter
 
-        holder.contentLayout.setOnClickListener {
-            if (expandedPosition != position) {
-                // Collapse the previously expanded item
-                val previouslyExpandedPosition = expandedPosition
-                expandedPosition = position
-                if (previouslyExpandedPosition != -1) {
-                    notifyItemChanged(previouslyExpandedPosition)
-                }
+        holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            if (model.isExpandable) {
+                Log.d(TAG, "onBindViewHolder: opened")
+                holder.nestedRecycler.visibility = View.VISIBLE
+                model.isExpandable = false
+
             } else {
-                // Clicking on the expanded item again will collapse it
-                expandedPosition = -1
+                Log.d(TAG, "onBindViewHolder: closed")
+                holder.nestedRecycler.visibility = View.GONE
+                model.isExpandable = true
             }
-            isExpandable = expandedPosition == position
-            notifyItemChanged(position)
         }
+        
+        holder.contentLayout.setOnClickListener {
+            if (model.isExpandable) {
+                Log.d(TAG, "onBindViewHolder: opened")
+                holder.nestedRecycler.visibility = View.VISIBLE
+                model.isExpandable = false
+                previousExpanded = expanded
+            } else if(!model.isExpandable) {
+                Log.d(TAG, "onBindViewHolder: closed")
+                holder.nestedRecycler.visibility = View.GONE
+                model.isExpandable = true
+            }
+        }
+
+
     }
+
 
     override fun getItemCount(): Int = cars.size
 
