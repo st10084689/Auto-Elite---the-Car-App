@@ -1,6 +1,5 @@
-package com.harmless.autoelitekotlin.view.recyclerViews
+package com.harmless.autoelitekotlin.view.adapters
 
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.CarBrand
-import com.harmless.autoelitekotlin.model.Utility
-import com.harmless.autoelitekotlin.view.MakeAndModel
+import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 private const val TAG = "SelectedModelNestedRecyclerAdapter"
 class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private val carModels : List<String>,private val mainPostion:Int) :
@@ -38,7 +36,7 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private 
 
              addValueToKey(carBrand, model)
 
-                for (item in Utility.carBrandsSelected){
+                for (item in SelectedValues.carBrandsSelected){
                     Log.d(TAG, "onBindViewHolder: ${item.name}")
                     for (i in item.models!!){
                     Log.d(TAG, "onBindViewHolder: $i")
@@ -60,13 +58,13 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private 
     }
 
     fun addValueToKey(name: String, model: String) {
-        val existingBrand = Utility.carBrandsSelected.find { it.name == name }
+        val existingBrand = SelectedValues.carBrandsSelected.find { it.name == name }
 
         if (existingBrand != null) {
             existingBrand.models!!.add(model)
         } else {
             val newBrand = CarBrand(mutableListOf(model), name)
-            Utility.carBrandsSelected.add(newBrand)
+            SelectedValues.carBrandsSelected.add(newBrand)
         }
     }
 

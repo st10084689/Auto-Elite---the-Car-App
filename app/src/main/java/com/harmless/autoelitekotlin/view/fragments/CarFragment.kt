@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,9 +15,15 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.firebase.database.DatabaseError
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.Constants
+import com.harmless.autoelitekotlin.model.utils.Constants
 import com.harmless.autoelitekotlin.model.Car
-import com.harmless.autoelitekotlin.model.Utility
+import com.harmless.autoelitekotlin.model.utils.SelectedValues
+import com.harmless.autoelitekotlin.view.activities.MakeAndModel
+import com.harmless.autoelitekotlin.view.activities.PriceSelection
+import com.harmless.autoelitekotlin.view.activities.ShowMore
+import com.harmless.autoelitekotlin.view.activities.VehicleList
+import com.harmless.autoelitekotlin.view.activities.YearSelection
+import com.harmless.autoelitekotlin.view.adapters.SpinnerAdapter
 import com.harmless.autoelitekotlin.viewModel.CarViewModel
 import java.lang.StringBuilder
 
@@ -27,16 +33,16 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
         private val TAG = "CAR FRAGMENT"
     }
 
-    private var selectedBrand: String? = null
-    private var selectedModel: String? = null
-    private var selectedYear: String? = null
-    private var selectedColor: String? = null
-    private var selectedDriveTrain: String? = null
-    private var selectedLocation: String? = null
-    private var selectedMinimumMileage: Int? = null
-    private var selectedMaximumMileage: Int? = null
-    private var selectedPrice: Double? = null
-    private var selectedTransmission: String? = null
+//    private var selectedBrand: String? = null
+//    private var selectedModel: String? = null
+//    private var selectedYear: String? = null
+//    private var selectedColor: String? = null
+//    private var selectedDriveTrain: String? = null
+//    private var selectedLocation: String? = null
+//    private var selectedMinimumMileage: Int? = null
+//    private var selectedMaximumMileage: Int? = null
+//    private var selectedPrice: Double? = null
+//    private var selectedTransmission: String? = null
     private var viewModel: CarViewModel = CarViewModel()
     private lateinit var carBrandTxt: TextView
 
@@ -77,16 +83,29 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
            val toPriceSelection = Intent(view.context, PriceSelection::class.java)
            startActivity(toPriceSelection)
        }
+       showMoreTxt.setOnClickListener{
+           val toShowMore = Intent(view.context, ShowMore::class.java)
+           startActivity(toShowMore)
+       }
 
 
-        //setting the drive train spinner
-        val driveTrainadapter: SpinnerAdapter = SpinnerAdapter(view.context, constants.driveTrain)
-        typeSpinner.adapter = driveTrainadapter
-        typeSpinner.setSelection(0)
+
+        val driveTrainAdapter = SpinnerAdapter(view.context, constants.driveTrain)//setting the drive train spinner
+        typeSpinner.adapter = driveTrainAdapter
+       for (items in constants.driveTrain){ //A forLoop to to see if an item is already is already selected
+           if(items == SelectedValues.selectedType){
+               typeSpinner.setSelection(SelectedValues.selectedType!!.indexOf(items))
+           }
+           else{
+               typeSpinner.setSelection(0)
+           }
+       }
+
         typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = driveTrainadapter.getItem(position)
-                selectedDriveTrain = selectedItem
+                val selectedItem = driveTrainAdapter.getItem(position)
+                SelectedValues.selectedType = selectedItem
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -96,14 +115,23 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
         //setting the mileage spinner
         val mileageAdapter = SpinnerAdapter(view.context, constants.mileage)
         mileageSpinner.adapter = mileageAdapter
-        mileageSpinner.setSelection(0)
+       for (items in constants.mileage){//A forLoop to to see if an item is already is already selected
+           if(items == SelectedValues.selectedMileage){
+
+               mileageSpinner.setSelection(SelectedValues.selectedType!!.indexOf(items))
+           }
+           else{
+               mileageSpinner.setSelection(0)
+           }
+       }
         mileageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                 val selectedItem = mileageAdapter.getItem(position)
 
-                selectedMaximumMileage = viewModel.maxMileage(selectedItem!!)
-                selectedMinimumMileage = viewModel.minMileage(selectedItem!!)
+                SelectedValues.selectedMileage = selectedItem
+                SelectedValues.selectedMaxMileage = viewModel.maxMileage(selectedItem!!)
+                SelectedValues.selectedMinMileage = viewModel.minMileage(selectedItem!!)
 
             }
 
@@ -114,14 +142,14 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
 
         searchBtn.setOnClickListener {
                 viewModel.setSelectedCars(
-                    Utility.carBrandsSelected,
-                    Utility.selectedYear,
-                    null,
-                    null,
-                    null,
-                    selectedMinimumMileage,
-                    selectedMaximumMileage,
-                    Utility.selectedPrice,
+                    SelectedValues.carBrandsSelected,
+                    SelectedValues.selectedYear,
+                    SelectedValues.selectedColor,
+                    SelectedValues.selectedType,
+                    SelectedValues.selectedProvince,
+                    SelectedValues.selectedMinMileage,
+                    SelectedValues.selectedMaxMileage,
+                    SelectedValues.selectedPrice,
                     null,
                     this
                 )
@@ -145,11 +173,11 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
 
     override fun onResume() {
         super.onResume()
-        if(Utility.carBrandsSelected!=null){
-            if(Utility.carBrandsSelected.isNotEmpty()){
+        if(SelectedValues.carBrandsSelected!=null){
+            if(SelectedValues.carBrandsSelected.isNotEmpty()){
 
             val displayCars = StringBuilder()
-            for (item in Utility.carBrandsSelected){
+            for (item in SelectedValues.carBrandsSelected){
                 if (item.models!!.isEmpty()){
                     displayCars.append(item)
                 }

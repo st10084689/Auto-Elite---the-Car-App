@@ -1,18 +1,17 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseError
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.CarBrand
-import com.harmless.autoelitekotlin.view.recyclerViews.SelectBrandRecyclerAdapter
+import com.harmless.autoelitekotlin.view.adapters.SelectBrandRecyclerAdapter
 import com.harmless.autoelitekotlin.viewModel.CarBrandCallback
 import com.harmless.autoelitekotlin.viewModel.MakeAndModelViewModel
 
-private const val TAG = "MakeAndModel"
 class MakeAndModel : AppCompatActivity() {
 
 
@@ -55,4 +54,3 @@ class MakeAndModel : AppCompatActivity() {
         }
     }
 }
-

@@ -1,15 +1,14 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseError
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.view.recyclerViews.YearSelectionRecyclerAdapter
+import com.harmless.autoelitekotlin.view.adapters.YearSelectionRecyclerAdapter
 import com.harmless.autoelitekotlin.viewModel.YearSelectionViewModel
-
 
 class YearSelection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

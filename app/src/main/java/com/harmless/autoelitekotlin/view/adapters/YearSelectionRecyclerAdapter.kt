@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.recyclerViews
+package com.harmless.autoelitekotlin.view.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.Utility
+import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 class YearSelectionRecyclerAdapter(private val items: List<Int>):
     RecyclerView.Adapter<YearSelectionRecyclerAdapter.ItemViewHolder>(){
@@ -32,10 +32,10 @@ class YearSelectionRecyclerAdapter(private val items: List<Int>):
         holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
 
             if(isChecked){
-                Utility.selectedYear.add(items[position])
+                SelectedValues.selectedYear.add(items[position])
             }
             else{
-                Utility.selectedYear.remove(items[position])
+                SelectedValues.selectedYear.remove(items[position])
             }
 
         }

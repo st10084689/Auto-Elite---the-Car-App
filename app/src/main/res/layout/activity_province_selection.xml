@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.PriceSelection">
+    tools:context=".view.activities.ProvinceSelection">
+
 
     <RelativeLayout
 
@@ -12,19 +13,21 @@
         android:layout_width="match_parent"
         android:background="@color/car_screen_color"
         android:layout_height="50dp">
+
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sora_font_family"
             android:text="Years"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:fontFamily="@font/sora_font_family"
-            android:layout_centerInParent="true"/>
+            android:textSize="20sp" />
     </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/PriceRecyclerView"
+        android:id="@+id/provinceRecyclerView"
         android:layout_below="@id/NavBarRelative"
         android:layout_above="@id/buttons"
         android:layout_width="match_parent"
@@ -41,10 +44,10 @@
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_alignParentBottom="true"
         >
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/BackBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,7 +60,6 @@
             android:background="@drawable/back_button"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/ApplyBtn"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textSize="20sp"

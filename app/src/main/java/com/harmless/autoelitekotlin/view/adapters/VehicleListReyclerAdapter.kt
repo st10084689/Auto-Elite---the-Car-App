@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.recyclerViews
+package com.harmless.autoelitekotlin.view.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.Car
-import com.harmless.autoelitekotlin.view.VehicleList
 
 
 class VehicleListReyclerAdapter(private val cars: List<Car>):

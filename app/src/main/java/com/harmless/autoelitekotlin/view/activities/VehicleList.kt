@@ -1,14 +1,13 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.Car
-import com.harmless.autoelitekotlin.view.recyclerViews.VehicleListReyclerAdapter
+import com.harmless.autoelitekotlin.view.adapters.VehicleListReyclerAdapter
 
 class VehicleList : AppCompatActivity() {
 

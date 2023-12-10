@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.recyclerViews
+package com.harmless.autoelitekotlin.view.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.CarBrand
-import com.harmless.autoelitekotlin.view.MakeAndModel
 import com.harmless.autoelitekotlin.viewModel.MakeAndModelViewModel
 import com.harmless.autoelitekotlin.viewModel.TAG
 

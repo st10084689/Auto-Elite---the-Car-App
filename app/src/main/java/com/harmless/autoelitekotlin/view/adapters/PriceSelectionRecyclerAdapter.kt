@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.recyclerViews
+package com.harmless.autoelitekotlin.view.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.Utility
+import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 class PriceSelectionRecyclerAdapter(private val items: List<Double>):
     RecyclerView.Adapter<PriceSelectionRecyclerAdapter.ItemViewHolder>(){
@@ -36,12 +36,12 @@ class PriceSelectionRecyclerAdapter(private val items: List<Double>):
         holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
 
             if(isChecked){
-                Utility.selectedPrice.add(items[position])
+                SelectedValues.selectedPrice.add(items[position])
             }
             else{
-                Utility.selectedPrice.remove(items[position])
+                SelectedValues.selectedPrice.remove(items[position])
             }
-            for (items in Utility.selectedPrice){
+            for (items in SelectedValues.selectedPrice){
                 Log.d(TAG, "onBindViewHolder:  $items")
             }
 

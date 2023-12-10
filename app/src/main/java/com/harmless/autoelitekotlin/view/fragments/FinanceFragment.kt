@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
