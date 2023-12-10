@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activities.ShowMore">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:id="@+id/carBrandBtn"
+                android:layout_marginTop="33dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:id="@+id/CarBrandTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/sora_font_family"
+                    android:text="Car Brand"
+                    android:textColor="@color/spinner_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <Spinner
+                android:id="@+id/TypeBtn"
+                android:entries="@array/type_array"
+                android:background="@drawable/custom_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_below="@id/carBrandBtn"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/sora_bold"
+                android:textColor="@color/spinner_color"
+                android:spinnerMode="dropdown"/>
+
+
+
+
+            <RelativeLayout
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:id="@+id/YearBtn"
+                android:layout_below="@id/TypeBtn"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:id="@+id/YearTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/sora_font_family"
+                    android:text="Year"
+                    android:textColor="@color/spinner_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <Spinner
+                android:id="@+id/MileageBtn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/YearBtn"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:background="@drawable/custom_spinner" />
+
+            <RelativeLayout
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:id="@+id/PriceBtn"
+                android:layout_below="@id/MileageBtn"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:id="@+id/PriceTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/sora_font_family"
+                    android:text="Price"
+                    android:textColor="@color/spinner_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+
+
+            <Spinner
+                android:background="@drawable/custom_spinner"
+                android:id="@+id/NewOrUsedBtn"
+                android:layout_below="@id/PriceBtn"
+                android:layout_width="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:layout_height="45dp"/>
+
+            <RelativeLayout
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:id="@+id/LocationBtn"
+                android:layout_below="@id/NewOrUsedBtn"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:id="@+id/LocationTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/sora_font_family"
+                    android:text="Province"
+                    android:textColor="@color/spinner_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+
+            <Spinner
+                android:background="@drawable/custom_spinner"
+                android:id="@+id/FuelTypeBtn"
+                android:layout_below="@id/LocationBtn"
+                android:layout_width="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:layout_height="45dp"/>
+
+
+            <RelativeLayout
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:id="@+id/ColourBtn"
+                android:layout_below="@id/FuelTypeBtn"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <TextView
+                    android:id="@+id/ColourTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/sora_font_family"
+                    android:text="Colour"
+                    android:textColor="@color/spinner_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                >
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/backBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Back"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_margin="20dp"
+                    android:padding="10dp"
+                    android:fontFamily="@font/sora_font_family"
+                    android:background="@drawable/back_button"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/applyBtn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:text="Apply"
+                    android:textColor="@color/white"
+                    android:layout_margin="20dp"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sora_font_family"
+                    android:background="@drawable/car_button"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

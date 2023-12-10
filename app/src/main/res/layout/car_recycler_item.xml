@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/recycler_background">
+    
+    
+    <TextView
+        android:id="@+id/VehicleBrandTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/VehicleImageCard"
+        android:lineSpacingExtra="1sp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="7dp"
+        android:text="CarBrand"
+        android:fontFamily="@font/sora_semi_bold"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/VehicleModelTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="9dp"
+        android:layout_toRightOf="@+id/VehicleBrandTxt"
+        android:fontFamily="@font/sora_semi_bold"
+        android:gravity="center"
+        android:lineSpacingExtra="4sp"
+        android:text="Model"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/VehicleYearStaticTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year:"
+        android:fontFamily="@font/sora_font_family"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_below="@id/VehicleBrandTxt"
+        android:layout_toRightOf="@id/VehicleImageCard"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="8dp"
+        />
+    <TextView
+        android:id="@+id/VehicleYearTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000"
+        android:layout_below="@id/VehicleBrandTxt"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/VehicleYearStaticTxt"
+        android:layout_marginTop="4dp"/>
+
+    <View
+        android:id="@+id/Barrier"
+        android:layout_width="3dp"
+        android:layout_toRightOf="@id/VehicleYearTxt"
+        android:layout_below="@id/VehicleBrandTxt"
+        android:layout_height="15dp"
+        android:background="@drawable/vertical_line"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <View
+        android:id="@+id/BarrierTwo"
+        android:layout_width="3dp"
+        android:layout_toRightOf="@id/VehicleYearTxt"
+        android:layout_below="@id/Barrier"
+        android:layout_height="15dp"
+        android:background="@drawable/vertical_line"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="17dp"
+        />
+
+    <TextView
+        android:id="@+id/VehicleMileageStaticTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mileage:"
+        android:fontFamily="@font/sora_font_family"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_below="@id/VehicleBrandTxt"
+        android:layout_toRightOf="@id/Barrier"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        />
+    <TextView
+        android:id="@+id/VehicleMileageTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000"
+        android:layout_below="@id/VehicleBrandTxt"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/VehicleMileageStaticTxt"
+        android:layout_marginTop="4dp"/>
+
+    <ImageView
+        android:id="@+id/axisImage"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/axis_image"
+        android:layout_below="@id/VehicleYearStaticTxt"
+        android:layout_toLeftOf="@id/TypeTxt"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/TypeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/VehicleYearStaticTxt"
+        android:text="4×4"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/car_screen_color"
+        android:layout_toLeftOf="@id/BarrierTwo"/>
+<androidx.cardview.widget.CardView
+    android:id="@+id/VehicleImageCard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    app:cardCornerRadius="12dp"
+    android:layout_marginLeft="10dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/VehicleImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/ic_launcher"/>
+    <RelativeLayout
+        android:id="@+id/ImageSize"
+        android:layout_below="@id/VehicleImage"
+        android:background="#737373"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="20dp">
+        <ImageView
+            android:id="@+id/cameraImage"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/baseline_camera_alt_24"/>
+        <TextView
+            android:id="@+id/size"
+            android:layout_toRightOf="@id/cameraImage"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/gps_point_image"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:background="@drawable/gps_point"
+        android:layout_below="@id/VehicleYearStaticTxt"
+        android:layout_toRightOf="@id/BarrierTwo"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        />
+
+    <TextView
+        android:id="@+id/LocationTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_toRightOf="@id/gps_point_image"
+        android:layout_below="@id/VehicleMileageTxt"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="3dp"/>
+
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:layout_toRightOf="@id/VehicleImageCard"
+        android:layout_below="@id/axisImage"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="12dp"/>
+
+
+</RelativeLayout>

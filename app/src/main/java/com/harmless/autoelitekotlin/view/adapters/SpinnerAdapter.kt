@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.adapters
 
 
 import android.app.Activity

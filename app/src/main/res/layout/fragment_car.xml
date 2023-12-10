@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CarFragment">
+    tools:context=".view.fragments.CarFragment">
 
     <RelativeLayout
         android:background="@drawable/custom_spinner"
@@ -43,7 +43,6 @@
 
         <Spinner
             android:id="@+id/typeBrandSpinner"
-            android:entries="@array/type_array"
             android:background="@drawable/custom_spinner"
             android:layout_width="0dp"
             android:layout_weight="1"

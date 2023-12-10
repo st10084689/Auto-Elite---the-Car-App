@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.MakeAndModel">
+    tools:context=".view.activities.PriceSelection">
+
     <RelativeLayout
 
         android:id="@+id/NavBarRelative"
@@ -14,25 +15,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Makes and Models"
+            android:text="Years"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/sora_font_family"
             android:layout_centerInParent="true"/>
-
     </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Car_selection_recyclerview"
+        android:id="@+id/PriceRecyclerView"
+        android:layout_below="@id/NavBarRelative"
+        android:layout_above="@id/buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/buttons"
-        android:layout_below="@id/NavBarRelative"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        />
+
+
 
     <LinearLayout
         android:id="@+id/buttons"
@@ -41,7 +44,7 @@
         android:layout_alignParentBottom="true"
         >
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/backBtn"
+            android:id="@+id/BackBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,7 +57,7 @@
             android:background="@drawable/back_button"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/applyBtn"
+            android:id="@+id/ApplyBtn"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textSize="20sp"
@@ -66,4 +69,5 @@
             android:fontFamily="@font/sora_font_family"
             android:background="@drawable/car_button"/>
     </LinearLayout>
+
 </RelativeLayout>

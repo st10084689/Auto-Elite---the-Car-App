@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view
+package com.harmless.autoelitekotlin.view.activities
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.harmless.autoelitekotlin.R
+import com.harmless.autoelitekotlin.view.adapters.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     private lateinit var navigationView: NavigationView
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     }
 
     private fun updateTabStyle(position:Int?){
-        var tab:TabLayout.Tab? = tabLayout.getTabAt(position!!)
+        var tab: TabLayout.Tab? = tabLayout.getTabAt(position!!)
 
         if(tab != null){
             var color:Int = getFragmentThemeColor(position)
