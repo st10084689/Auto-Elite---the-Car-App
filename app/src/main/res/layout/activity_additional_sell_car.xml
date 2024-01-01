@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activities.AdditionalSellCar">
+
+        <RelativeLayout
+            android:id="@+id/NavBarRelative"
+            android:layout_width="match_parent"
+            android:background="@color/car_screen_color"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Additional Car Information"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/sora_font_family"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/NavBarRelative">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/frontBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="front"
+        android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/firstImage"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rearBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rear"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/secondImage"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="left"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/thirdImage"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rightBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="right"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/fourImage"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/color_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Color"/>
+        <Spinner
+            android:id="@+id/color_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/description_text"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description"/>
+
+        <EditText
+            android:id="@+id/description_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="optional"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/done_btn"
+        android:text="arrow"
+        android:layout_below="@id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

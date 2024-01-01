@@ -7,7 +7,8 @@ data class Constants (
     val newOrUsed: List<String> = mutableListOf("New/Used","New","Used"),
     val fuelType: List<String> = mutableListOf("Fuel Type","Petrol","Diesel","Electric"),
     val provinces: List<String> = mutableListOf("Eastern Cape","Gauteng","KwaZulu-Natal","Limpopo","Northern Cape","North West","Western Cape"),
-    val color : List<String> = mutableListOf("Red","Yellow","Green","Blue","Silver","Black","White","Orange","Pink","Purple","Brown")
+    val color : List<String> = mutableListOf("Red","Yellow","Green","Blue","Silver","Black","White","Orange","Pink","Purple","Brown"),
+    val sharedPrefString : String = "AutoElite"
 )
 
 

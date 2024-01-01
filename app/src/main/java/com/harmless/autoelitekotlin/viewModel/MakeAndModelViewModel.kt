@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.harmless.autoelitekotlin.model.CarBrand
+import com.harmless.autoelitekotlin.model.CarModels
 
 interface CarBrandCallback {
     fun onCarBrandLoaded(carBrands: List<CarBrand>)
@@ -48,7 +49,7 @@ class MakeAndModelViewModel {
             return carBrands
         }
 
-    fun isExpandable(carsBrandList: List<String>): Boolean {
+    fun isExpandable(carsBrandList: List<CarModels>): Boolean {
         if(carsBrandList != null){
             return !carsBrandList.isEmpty()
         }
