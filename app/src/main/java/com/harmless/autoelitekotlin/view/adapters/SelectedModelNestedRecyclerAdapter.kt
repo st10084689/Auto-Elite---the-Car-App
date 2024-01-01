@@ -9,10 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.CarBrand
+import com.harmless.autoelitekotlin.model.CarModels
 import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 private const val TAG = "SelectedModelNestedRecyclerAdapter"
-class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private val carModels : List<String>,private val mainPostion:Int) :
+class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private val carModels : List<CarModels>, private val mainPostion:Int) :
     RecyclerView.Adapter<SelectedModelNestedRecyclerAdapter.ItemHolder>() {
 
 
@@ -24,7 +25,7 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private 
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val model = carModels!!.get(position)
-        holder.modelText.text = model
+        holder.modelText.text = model.model
 
 
         holder.modelCheck.setOnClickListener {
@@ -57,7 +58,7 @@ class SelectedModelNestedRecyclerAdapter(private val carBrand : String, private 
         return 0
     }
 
-    fun addValueToKey(name: String, model: String) {
+    fun addValueToKey(name: String, model: CarModels) {
         val existingBrand = SelectedValues.carBrandsSelected.find { it.name == name }
 
         if (existingBrand != null) {

@@ -14,4 +14,5 @@
     <color name="bike_secondary_color">#3A7103</color>
     <color name="accessories_secondary_color">#E9A800</color>
     <color name="spinner_color">#565656</color>
+    <color name="car_sell_color">#EEEEEE</color>
 </resources>

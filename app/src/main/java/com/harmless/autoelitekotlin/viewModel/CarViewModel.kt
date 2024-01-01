@@ -138,7 +138,11 @@ class CarViewModel {
 
                     if(carsSelected.isEmpty()){
 
-                        val colorCondition =  (colorSelected.isNotEmpty() && carsColor!! in (colorSelected[0]..colorSelected[priceSelected.size-1])||colorSelected.isEmpty())
+                            Log.d(TAG, "onDataLoadedColor: the car color is $cars")
+                            Log.d(TAG, "onDataLoadedColor: the car color is $carsColor")
+
+
+                        val colorCondition = (colorSelected.isEmpty()||colorSelected.isNotEmpty() && carsColor!! in (colorSelected[0]..colorSelected[priceSelected.size-1]))
                         val typeCondition = carsType == driveTrainSelected || driveTrainSelected == null||driveTrainSelected =="Type"
                         val locationCondition = (locationSelected.isNotEmpty() && carsLocation!! in (locationSelected[0]..locationSelected[priceSelected.size-1])||locationSelected.isEmpty())
                         val mileageCondition = (minMileageSelected == null&&minMileageSelected == null || carsMileage in (minMileageSelected..maxMileageSelected!!))
@@ -172,7 +176,10 @@ class CarViewModel {
                     else{
                         for (carBrand in carsSelected) {
                             val brandCondition = carsBrand == carBrand.name || carsSelected.isEmpty() || carsSelected == null
-                            val modelCondition = carsModel == null || carsModel in carBrand.models || carBrand.models.isEmpty()
+                            var modelCondition = false
+                            for (items in carBrand.models){
+                                modelCondition = carsModel == null ||carsModel in items.model  || carBrand.models.isEmpty()
+                            }
                             val colorCondition =(colorSelected.isNotEmpty() && carsColor!! in (colorSelected[0]..colorSelected[priceSelected.size-1])||colorSelected.isEmpty())
                             val typeCondition = carsType == driveTrainSelected ||driveTrainSelected == null||driveTrainSelected =="Type"
                             val locationCondition = (locationSelected.isNotEmpty() && carsLocation!! in (locationSelected[0]..locationSelected[priceSelected.size-1])||locationSelected.isEmpty())
@@ -184,7 +191,7 @@ class CarViewModel {
                             Log.d(TAG, "-------------------------------------------------------------------")
 
                             Log.d(TAG, "onDataLoaded: BrandCondition $brandCondition the car is $carsBrand the selected car is ${carBrand.name}")
-                            Log.d(TAG, "onDataLoaded: modelCondition $modelCondition the car is $carsModel the selected car is ${carsModel in carBrand.models}")
+//                            Log.d(TAG, "onDataLoaded: modelCondition $modelCondition the car is $carsModel the selected car is ${carsModel in carBrand.models}")
                             Log.d(TAG, "onDataLoaded: colorCondition $colorCondition the car is $carsColor the selected car is ${colorSelected}")
                             Log.d(TAG, "onDataLoaded: typeCondition $typeCondition the car is $carsType  the selected car is ${driveTrainSelected}")
                             Log.d(TAG, "onDataLoaded: locationCondition $locationCondition the car is $carsLocation  the selected car is ${locationSelected}")
