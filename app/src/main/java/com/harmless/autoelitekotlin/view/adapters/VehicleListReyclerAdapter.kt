@@ -46,7 +46,7 @@ RecyclerView.Adapter<VehicleListReyclerAdapter.ItemViewHolder>(){
         val price = cars[position].price.toInt()
 
         holder.brandName.setText(cars[position].brand)
-        holder.modelName.setText(cars[position].model)
+        holder.modelName.text = cars[position].model
         holder.year.setText(cars[position].year!!.toString())
         holder.location.setText(cars[position].location)
         holder.type.setText(cars[position].type)

@@ -12,9 +12,7 @@ import com.google.firebase.auth.auth
 import com.google.firebase.database.database
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.databinding.ActivityAdditionalRegisterBinding
-import com.harmless.autoelitekotlin.databinding.ActivityRegisterBinding
 import com.harmless.autoelitekotlin.model.User
 import java.util.UUID
 
@@ -71,11 +69,11 @@ class AdditionalRegister : AppCompatActivity() {
             imageRef.putFile(imageUri)
                 .addOnSuccessListener { taskSnapshot ->
 
-                    Log.d(AdditionalSellCar.TAG, "uploadImage: $taskSnapshot")
+                    Log.d(ImageSellCar.TAG, "uploadImage: $taskSnapshot")
 
                 }
                 .addOnFailureListener { e ->
-                    Log.e(AdditionalSellCar.TAG, "Error uploading image", e)
+                    Log.e(ImageSellCar.TAG, "Error uploading image", e)
                 }
         }
         return imageName
@@ -86,7 +84,7 @@ class AdditionalRegister : AppCompatActivity() {
 
         if (requestCode == 10 && resultCode == RESULT_OK && data != null) {
             uri = data.data
-            Log.d(AdditionalSellCar.TAG, "onActivityResult: ${AdditionalSellCar.FIRST_IMAGE}")
+            Log.d(ImageSellCar.TAG, "onActivityResult: ${ImageSellCar.FIRST_IMAGE}")
 
             Glide.with(applicationContext)
                 .load(uri)

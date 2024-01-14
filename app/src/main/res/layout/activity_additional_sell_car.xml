@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.AdditionalSellCar">
+    tools:context=".view.activities.ImageSellCar">
 
         <RelativeLayout
             android:id="@+id/NavBarRelative"
@@ -80,28 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/color_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Car Color"/>
-        <Spinner
-            android:id="@+id/color_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="description"/>
-
-        <EditText
-            android:id="@+id/description_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="optional"/>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/done_btn"

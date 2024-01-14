@@ -58,13 +58,24 @@
                 android:fontFamily="@font/sora_font_family"
                 android:textColor="@color/white"
                 android:text="User"/>
-
-            <ImageButton
+<androidx.cardview.widget.CardView
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:layout_alignParentEnd="true"
+    app:cardCornerRadius="35dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/login_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/baseline_account_circle_24"
-                android:layout_alignParentEnd="true"/>
-
+                />
+    </RelativeLayout>
+        </androidx.cardview.widget.CardView>
         </RelativeLayout>
         <RelativeLayout
             android:padding="5dp"

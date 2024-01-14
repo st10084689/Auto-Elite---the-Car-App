@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.Button
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.harmless.autoelitekotlin.R
+import com.harmless.autoelitekotlin.databinding.ActivitySellCarBinding
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.CarModels
 import com.harmless.autoelitekotlin.model.Province
@@ -34,64 +33,41 @@ class SellCarActivity : AppCompatActivity() {
      var selectedBrands: String = ""
      var selectedModel: String= ""
      var selectedVariants: String= ""
-     var selectedProvince: String= ""
-     var selectedArea: String= ""
-     var selectedMileage: String= ""
-     var selectedMobile: String= ""
+     var selectedColor: String = ""
+    var selectedTransmission: String = ""
+    var selectedBodyType: String = ""
+    var selectedWheelDrive: String =""
+    var selectedYear : String = ""
 
 
-    //getting the edit texts
-    private lateinit var brandText: TextView
-    private lateinit var modelText: TextView
-    private lateinit var variantText: TextView
-    private lateinit var provinceText: TextView
-    private lateinit var areaText: TextView
-    private lateinit var mobileText : TextView
-    private lateinit var mileageText: TextView
 
-    lateinit var nextButton:ImageButton//for the bottom button
+
+    lateinit var nextButton: Button//for the bottom button
+
+    private lateinit var binding: ActivitySellCarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sell_car)
+        binding = ActivitySellCarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         init()
     }
 
     private fun init() {
-        //initialising the textViews
-        brandText = findViewById(R.id.brand_text)
-        modelText = findViewById(R.id.model_text)
-        variantText = findViewById(R.id.variant_text)
-        mileageText = findViewById(R.id.mileage_text)
-        provinceText = findViewById(R.id.province_text)
-        areaText = findViewById(R.id.area_text)
-        mobileText = findViewById(R.id.mobile_text)
 
-        //initialising the next button
-        nextButton = findViewById(R.id.next_button)
+        //initialising the button
+        nextButton = binding.nextButton
+
 
         //setting up the spinners texts
         val brandSpinner = findViewById<Spinner>(R.id.brand_spinner)
         val modelSpinner = findViewById<Spinner>(R.id.model_spinner)
         val variantSpinner = findViewById<Spinner>(R.id.variant_spinner)
-        val provinceSpinner = findViewById<Spinner>(R.id.province_spinner)
-        val areaSpinner = findViewById<Spinner>(R.id.area_spinner)
 
-        //setting up the edit texts
-        val mobileNumberEditText = findViewById<EditText>(R.id.mobile_edit_text)
-        val mileageEditText = findViewById<EditText>(R.id.mileage_edit_text)
 
         val viewModel = SellViewModel()
 
-        viewModel.getProvinces(object : SellViewModel.ProvincesCallback {
-            override fun onProvincesLoaded(provinces: List<Province>) {
-                provinceList = provinces
-         
-                val provinceAdapter = SpinnerAdapter(applicationContext, viewModel.toStringProvinceNames(provinceList!!))
-                provinceSpinner.adapter = provinceAdapter
 
-                }
-        })
         viewModel.setCarBrand(object : SellViewModel.CarBrandsCallBack{
             override fun onCarBrandLoaded(carBrands: ArrayList<CarBrand>) {
 
@@ -109,31 +85,7 @@ class SellCarActivity : AppCompatActivity() {
 
         var selectedText = ""
 
-        provinceSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                selectedText = parent.getItemAtPosition(position).toString()
-                selectedProvince = selectedText
-               val cityList =  viewModel.getChosenCities(selectedText,provinceList!!)
-                val cityAdapter = SpinnerAdapter(applicationContext,cityList)
-                areaSpinner.adapter = cityAdapter
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
-        }
-
-        areaSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                selectedText = parent.getItemAtPosition(position).toString()
-                selectedArea = selectedText
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
-        }
 
 
         brandSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -178,20 +130,99 @@ class SellCarActivity : AppCompatActivity() {
             }
         }
 
-        nextButton.setOnClickListener {
-            selectedMileage = mileageEditText.text.toString()
-            selectedMobile = mobileNumberEditText.text.toString()
+        val constants = com.harmless.autoelitekotlin.model.utils.Constants()
 
-           var valid =  isValid(selectedBrands, selectedModel, selectedVariants, selectedMileage, selectedProvince, selectedArea, selectedMobile)
+        val colorAdapter = SpinnerAdapter(applicationContext, constants.color)//setting up the adapter for the color spinner
+        binding.colorSpinner.adapter = colorAdapter
+
+        binding.colorSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedText = parent.getItemAtPosition(position).toString()
+                selectedColor = selectedText
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        val yearAdapter = SpinnerAdapter(applicationContext, constants.year)//setting up the adapter for the color spinner
+        binding.yearSpinner.adapter = yearAdapter
+
+        binding.yearSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedText = parent.getItemAtPosition(position).toString()
+                selectedYear = selectedText
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+
+
+
+        val transmissionColor = SpinnerAdapter(applicationContext, constants.transmission)
+        binding.transmissionSpinner.adapter = transmissionColor
+
+        binding.transmissionSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedText = parent.getItemAtPosition(position).toString()
+                selectedTransmission= selectedText
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        val bodyTypeAdapter = SpinnerAdapter(applicationContext, constants.bodyType)
+        binding.bodyTypeSpinner.adapter = bodyTypeAdapter
+
+        binding.bodyTypeSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedText = parent.getItemAtPosition(position).toString()
+                selectedBodyType= selectedText
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        val wheelTypeAdapter = SpinnerAdapter(applicationContext, constants.driveTrain)
+        binding.wheelSpinner.adapter = wheelTypeAdapter
+        binding.wheelSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedText = parent.getItemAtPosition(position).toString()
+                selectedWheelDrive= selectedText
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+
+        nextButton.setOnClickListener {
+
+           var valid =  isValid(selectedBrands, selectedModel, selectedYear, selectedVariants,  selectedColor, selectedTransmission, selectedBodyType, selectedWheelDrive)
             if(valid){
-               val toAdditionalInformation = Intent(applicationContext, AdditionalSellCar::class.java)
+               val toAdditionalInformation = Intent(applicationContext, ImageSellCar::class.java)
                 toAdditionalInformation.putExtra("brand", selectedBrands)
                 toAdditionalInformation.putExtra("model", selectedModel)
+                toAdditionalInformation.putExtra("year", selectedYear)
                 toAdditionalInformation.putExtra("variant", selectedVariants)
-                toAdditionalInformation.putExtra("province", selectedProvince)
-                toAdditionalInformation.putExtra("area", selectedArea)
-                toAdditionalInformation.putExtra("mobile", selectedMobile)
-                toAdditionalInformation.putExtra("mileage", selectedMileage)
+                toAdditionalInformation.putExtra("color", selectedColor)
+                toAdditionalInformation.putExtra("transmission", selectedTransmission)
+                toAdditionalInformation.putExtra("bodyType", selectedBodyType)
+                toAdditionalInformation.putExtra("wheelDrive", selectedWheelDrive)
                 startActivity(toAdditionalInformation)
             }
             else{
@@ -200,62 +231,70 @@ class SellCarActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValid(brand:String, model:String, variant:String, mileage:String,province:String, area:String, mobile:String):Boolean{
+    private fun isValid(brand:String, model:String, year:String, variant: String, color:String, transmission:String, bodyType:String, wheelDrive:String):Boolean{
         var isValid: Boolean
         if(brand.isEmpty()){
-          brandText.setTextColor(Color.parseColor("#fc1703"))
+          binding.brandText.setTextColor(Color.parseColor("#fc1703"))
           isValid= false
       }
         else{
-            brandText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.brandText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
           isValid= true
       }
         if(model.isEmpty()){
-            modelText.setTextColor(Color.parseColor("#fc1703"))
+            binding.modelText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            modelText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.modelText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            isValid= true
+        }
+        if(year.isEmpty()){
+            binding.yearText.setTextColor(Color.parseColor("#fc1703"))
+            isValid= false
+        }
+        else{
+            binding.yearText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
         if(variant.isEmpty()){
-            variantText.setTextColor(Color.parseColor("#fc1703"))
+            binding.variantText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            variantText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.variantText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
-        if(mileage.isEmpty()){
-            mileageText.setTextColor(Color.parseColor("#fc1703"))
+        if(color.isEmpty()){
+            binding.colorText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            mileageText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.colorText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
-        if(province.isEmpty()){
-            provinceText.setTextColor(Color.parseColor("#fc1703"))
+        if(transmission.isEmpty()){
+            binding.transmissionText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            provinceText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.transmissionText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
-        if(area.isEmpty()){
-            areaText.setTextColor(Color.parseColor("#fc1703"))
+        if(bodyType.isEmpty()){
+            binding.bodyTypeText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            areaText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.bodyTypeText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
-        if(mobile.isEmpty()){
-            mobileText.setTextColor(Color.parseColor("#fc1703"))
+        if(wheelDrive.isEmpty()){
+            binding.wheelText.setTextColor(Color.parseColor("#fc1703"))
             isValid= false
         }
         else{
-            mobileText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
+            binding.wheelText.setTextColor(ContextCompat.getColor(applicationContext, R.color.grey))
             isValid= true
         }
 
