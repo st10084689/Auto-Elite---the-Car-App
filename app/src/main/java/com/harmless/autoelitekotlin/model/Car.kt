@@ -16,7 +16,10 @@ data class Car(
     var provinces: String,
     var transmission: String,
     var type: String,
-    var year: Int
+    var year: Int,
+    var wheelDrive: String,
+    var variant: String,
+    var description: String
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -32,7 +35,10 @@ data class Car(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!
     )
 
     override fun describeContents(): Int {
@@ -52,7 +58,10 @@ data class Car(
         "",
         "",
         "",
-        0
+        0,
+        "",
+        "",
+        ""
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -69,6 +78,9 @@ data class Car(
         dest.writeString(transmission)
         dest.writeString(type)
         dest.writeInt(year)
+        dest.writeString(wheelDrive)
+        dest.writeString(variant)
+        dest.writeString(description)
     }
 
     companion object CREATOR : Parcelable.Creator<Car> {

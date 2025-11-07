@@ -125,95 +125,32 @@ class CarViewModel {
                 selectedCars.clear()
                 sortPrice()
                 sortYear()
+
                 for (car in cars) {
-                    val carsBrand = car.brand
-                    val carsModel = car.model
-                    val carsColor = car.color
-                    val carsType = car.type
-                    val carsLocation = car.location
-                    val carsMileage = car.mileage
-                    val carsPrice = car.price
-                    val carsTransmission = car.transmission
-                    val carsYear = car.year
+                    val brandCondition = carsSelected.isEmpty() || carsSelected.any { it.brand == car.brand }
+                    val modelCondition = carsSelected.isEmpty() || carsSelected.any { carBrand -> carBrand.models.any { it.name == car.model } }
+                    val colorCondition = colorSelected.isEmpty() || colorSelected.contains(car.color)
+                    val typeCondition = driveTrainSelected == null || driveTrainSelected == "Type" || car.type == driveTrainSelected
+                    val locationCondition = locationSelected.isEmpty() || locationSelected.contains(car.location)
+                    val mileageCondition = (minMileageSelected == null || maxMileageSelected == null) ||
+                            (car.mileage in (minMileageSelected!!..maxMileageSelected!!))
+                    val priceCondition = priceSelected.isEmpty() || (car.price in priceSelected.minOrNull()!!..priceSelected.maxOrNull()!!)
+                    val transmissionCondition = transmissionSelected == null || car.transmission == transmissionSelected
+                    val yearCondition = yearSelected.isEmpty() || car.year in (yearSelected.minOrNull()!!..yearSelected.maxOrNull()!!)
 
-                    if(carsSelected.isEmpty()){
-
-                        val colorCondition =  (colorSelected.isNotEmpty() && carsColor!! in (colorSelected[0]..colorSelected[priceSelected.size-1])||colorSelected.isEmpty())
-                        val typeCondition = carsType == driveTrainSelected || driveTrainSelected == null||driveTrainSelected =="Type"
-                        val locationCondition = (locationSelected.isNotEmpty() && carsLocation!! in (locationSelected[0]..locationSelected[priceSelected.size-1])||locationSelected.isEmpty())
-                        val mileageCondition = (minMileageSelected == null&&minMileageSelected == null || carsMileage in (minMileageSelected..maxMileageSelected!!))
-                        val priceCondition =  (priceSelected.isNotEmpty() && carsPrice!! in (priceSelected[0]..priceSelected[priceSelected.size-1])||priceSelected.isEmpty())
-                        val transmissionCondition = carsTransmission == transmissionSelected || transmissionSelected == null
-                        val yearCondition = (yearSelected.isNotEmpty() && carsYear!! in (yearSelected[0]..yearSelected[yearSelected.size-1])||yearSelected.isEmpty())
-                        Log.d(TAG, "onDataLoaded: colorCondition $colorCondition the car is $carsColor the selected car is ${colorSelected}")
-                        Log.d(TAG, "onDataLoaded: typeCondition $typeCondition the car is $carsType  the selected car is ${driveTrainSelected}")
-                        Log.d(TAG, "onDataLoaded: locationCondition $locationCondition the car is $carsLocation  the selected car is ${locationSelected}")
-                        Log.d(TAG, "onDataLoaded: mileageCondition $mileageCondition the value is $carsMileage the selected min ${SelectedValues.selectedMinMileage} the selected max ${SelectedValues.selectedMaxMileage} ")
-                        Log.d(TAG, "onDataLoaded: priceCondition $priceCondition ")
-                        Log.d(TAG, "onDataLoaded: transmissionCondition $transmissionCondition the car is $carsTransmission  the selected car is ${transmissionSelected}")
-                        Log.d(TAG, "onDataLoaded: yearCondition $yearCondition ")
-                        Log.d(TAG, "onDataLoaded:-------------------------------------------------------------------")
-                        Log.d(TAG, "onDataLoaded:-------------------------------------------------------------------")
-
-                        if (colorCondition &&
-                            typeCondition &&
-                            locationCondition &&
-                            mileageCondition &&
-                            priceCondition &&
-                            transmissionCondition &&
-                            yearCondition
-                        ) {
-
-                            selectedCars.add(car)
-                            Log.d(TAG, "getSelectedCars: +add" + car.brand)
-                        }
-
+                    if (brandCondition &&
+                        modelCondition &&
+                        colorCondition &&
+                        typeCondition &&
+                        locationCondition &&
+                        mileageCondition &&
+                        priceCondition &&
+                        transmissionCondition &&
+                        yearCondition
+                    ) {
+                        selectedCars.add(car)
                     }
-                    else{
-                        for (carBrand in carsSelected) {
-                            val brandCondition = carsBrand == carBrand.name || carsSelected.isEmpty() || carsSelected == null
-                            val modelCondition = carsModel == null || carsModel in carBrand.models || carBrand.models.isEmpty()
-                            val colorCondition =(colorSelected.isNotEmpty() && carsColor!! in (colorSelected[0]..colorSelected[priceSelected.size-1])||colorSelected.isEmpty())
-                            val typeCondition = carsType == driveTrainSelected ||driveTrainSelected == null||driveTrainSelected =="Type"
-                            val locationCondition = (locationSelected.isNotEmpty() && carsLocation!! in (locationSelected[0]..locationSelected[priceSelected.size-1])||locationSelected.isEmpty())
-                            val mileageCondition = (minMileageSelected == null&&minMileageSelected == null || carsMileage in (minMileageSelected..maxMileageSelected!!))
-                            val priceCondition =  (priceSelected.isNotEmpty() && carsPrice!! in (priceSelected[0]..priceSelected[priceSelected.size-1])||priceSelected.isEmpty())
-                            val transmissionCondition = carsTransmission == transmissionSelected || transmissionSelected == null
-                            val yearCondition = (yearSelected.isNotEmpty() && carsYear!! in (yearSelected[0]..yearSelected[yearSelected.size-1])||yearSelected.isEmpty())
-                            Log.d(TAG, "-------------------------------------------------------------------")
-                            Log.d(TAG, "-------------------------------------------------------------------")
-
-                            Log.d(TAG, "onDataLoaded: BrandCondition $brandCondition the car is $carsBrand the selected car is ${carBrand.name}")
-                            Log.d(TAG, "onDataLoaded: modelCondition $modelCondition the car is $carsModel the selected car is ${carsModel in carBrand.models}")
-                            Log.d(TAG, "onDataLoaded: colorCondition $colorCondition the car is $carsColor the selected car is ${colorSelected}")
-                            Log.d(TAG, "onDataLoaded: typeCondition $typeCondition the car is $carsType  the selected car is ${driveTrainSelected}")
-                            Log.d(TAG, "onDataLoaded: locationCondition $locationCondition the car is $carsLocation  the selected car is ${locationSelected}")
-                            Log.d(TAG, "onDataLoaded: mileageCondition $mileageCondition the car is $carsColor  the selected car is ${carBrand.name}")
-                            Log.d(TAG, "onDataLoaded: priceCondition $priceCondition ")
-                            Log.d(TAG, "onDataLoaded: transmissionCondition $transmissionCondition the car is $carsTransmission  the selected car is ${transmissionSelected}")
-                            Log.d(TAG, "onDataLoaded: yearCondition $yearCondition ")
-                            Log.d(TAG, "-------------------------------------------------------------------")
-                            Log.d(TAG, "-------------------------------------------------------------------")
-
-                            if (brandCondition  &&
-                                modelCondition &&
-                                colorCondition &&
-                                typeCondition &&
-                                locationCondition &&
-                                mileageCondition &&
-                                priceCondition &&
-                                transmissionCondition &&
-                                yearCondition
-                            ) {
-
-                                selectedCars.add(car)
-
-                                Log.d(TAG, "getSelectedCars: +add" + car.brand)
-                            }
-                        }
-                    }
-                    }
-
+                }
 
                 callback.onDataLoaded(selectedCars)
             }
@@ -223,6 +160,7 @@ class CarViewModel {
             }
         })
     }
+
 
     private fun sortPrice(){
        val list = SelectedValues.selectedPrice

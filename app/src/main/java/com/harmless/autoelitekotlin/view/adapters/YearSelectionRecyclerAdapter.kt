@@ -16,7 +16,7 @@ class YearSelectionRecyclerAdapter(private val items: List<Int>):
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_items_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.brand_items_card, parent, false)
         return ItemViewHolder(view)
     }
 
