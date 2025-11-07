@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AutoEliteKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.SellSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SellCarActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.activities.ColorSelection"
             android:exported="false" />
         <activity

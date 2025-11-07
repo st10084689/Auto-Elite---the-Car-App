@@ -182,7 +182,7 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
                     displayCars.append(item)
                 }
                 else{
-                    displayCars.append("${item.name}[${item.models!!.size}]")
+                    displayCars.append("${item.brand}[${item.models!!.size}]")
                 }
 
             }

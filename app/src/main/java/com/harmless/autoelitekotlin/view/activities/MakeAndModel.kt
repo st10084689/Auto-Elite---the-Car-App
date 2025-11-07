@@ -3,6 +3,7 @@ package com.harmless.autoelitekotlin.view.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseError
@@ -14,7 +15,7 @@ import com.harmless.autoelitekotlin.viewModel.MakeAndModelViewModel
 
 class MakeAndModel : AppCompatActivity() {
 
-
+    private lateinit var viewModel: MakeAndModelViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +30,14 @@ class MakeAndModel : AppCompatActivity() {
         selectedCarRecycler.setHasFixedSize(true)
         selectedCarRecycler.layoutManager = LinearLayoutManager(this)
 
-        val viewModel = MakeAndModelViewModel()
+        viewModel = MakeAndModelViewModel()
 
-        viewModel.setCarBrand(object : CarBrandCallback {
+        viewModel.getCarBrand(object : CarBrandCallback {
             override fun onCarBrandLoaded(carBrands: List<CarBrand>) {
 
-                val adapter = SelectBrandRecyclerAdapter(carBrands)
+
+                val adapter = SelectBrandRecyclerAdapter(carBrands, viewModel)
+
 
                 selectedCarRecycler.adapter = adapter
             }

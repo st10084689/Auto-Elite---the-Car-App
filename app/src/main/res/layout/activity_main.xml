@@ -7,16 +7,13 @@
     android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".view.activities.MainActivity"
     tools:ignore="HardcodedText">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
-
-
-
 
         <ImageView
             android:layout_width="match_parent"
