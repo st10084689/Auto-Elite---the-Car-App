@@ -1,13 +1,12 @@
-package com.harmless.autoelitekotlin.view.activities
+package com.harmless.autoelitekotlin.view.activities.FilterActivities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.utils.Constants
 import com.harmless.autoelitekotlin.view.adapters.ColourSelectionRecyclerAdapter
-import com.harmless.autoelitekotlin.view.adapters.ProvinceSelectionRecyclerAdapter
 
 class ColorSelection : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

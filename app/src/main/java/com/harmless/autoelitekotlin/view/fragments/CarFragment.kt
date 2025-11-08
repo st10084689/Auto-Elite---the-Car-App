@@ -17,12 +17,11 @@ import com.google.firebase.database.DatabaseError
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.utils.Constants
 import com.harmless.autoelitekotlin.model.Car
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
-import com.harmless.autoelitekotlin.view.activities.MakeAndModel
-import com.harmless.autoelitekotlin.view.activities.PriceSelection
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.MakeAndModel
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.PriceSelection
 import com.harmless.autoelitekotlin.view.activities.ShowMore
 import com.harmless.autoelitekotlin.view.activities.VehicleList
-import com.harmless.autoelitekotlin.view.activities.YearSelection
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.YearSelection
 import com.harmless.autoelitekotlin.view.adapters.SpinnerAdapter
 import com.harmless.autoelitekotlin.viewModel.CarViewModel
 import java.lang.StringBuilder

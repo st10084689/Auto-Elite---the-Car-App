@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.activities
+package com.harmless.autoelitekotlin.view.activities.FilterActivities
 
 import android.os.Bundle
 import android.widget.Toast

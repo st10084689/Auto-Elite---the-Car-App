@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 import com.harmless.autoelitekotlin.model.Car
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.utils.Constants
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
+
 
 const val TAG = "CarViewModel"
 

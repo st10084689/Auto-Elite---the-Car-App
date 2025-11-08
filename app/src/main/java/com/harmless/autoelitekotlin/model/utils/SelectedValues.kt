@@ -1,6 +1,5 @@
-package com.harmless.autoelitekotlin.model.utils
-
 import com.harmless.autoelitekotlin.model.CarBrand
+import com.harmless.autoelitekotlin.model.CarModel
 
 object SelectedValues {
 
@@ -25,6 +24,8 @@ object SelectedValues {
      var selectedMinMileage:Int? = null
 
      var selectedMileage:String? = null
+
+
 
 
 }

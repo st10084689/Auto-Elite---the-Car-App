@@ -10,7 +10,11 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.model.utils.Constants
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.ColorSelection
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.MakeAndModel
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.PriceSelection
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.ProvinceSelection
+import com.harmless.autoelitekotlin.view.activities.FilterActivities.YearSelection
 import com.harmless.autoelitekotlin.view.adapters.SpinnerAdapter
 import com.harmless.autoelitekotlin.viewModel.CarViewModel
 

@@ -8,7 +8,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
+
 
 class ColourSelectionRecyclerAdapter(private val items: List<String>):
     RecyclerView.Adapter<ColourSelectionRecyclerAdapter.ItemViewHolder>(){
