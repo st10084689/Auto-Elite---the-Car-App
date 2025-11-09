@@ -192,7 +192,7 @@
             android:textColor="@color/motorbike_secondary_color"/>
 
         <Spinner
-            android:id="@+id/sell_car_color_cardview"
+            android:id="@+id/sell_car_color_spinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/sell_car_color"
@@ -204,7 +204,7 @@
             android:id="@+id/sell_car_transmission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/sell_car_color_cardview"
+            app:layout_constraintTop_toBottomOf="@id/sell_car_color_spinner"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="20sp"
             android:textColor="@color/black"
@@ -256,7 +256,18 @@
             app:layout_constraintTop_toBottomOf="@id/sell_car_body"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/sell_car_background"
-        ></androidx.constraintlayout.widget.ConstraintLayout>
+        >
+            <TextView
+                android:id="@+id/carBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"
+                android:textSize="24sp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/sell_car_wheel"

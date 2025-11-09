@@ -110,47 +110,28 @@ class SellCarViewModel : ViewModel() {
 
         var selectedYear: Int? = null
 
-        var car: Car = Car(
-            BodyType = "",
-            IsNew = false,
-            brand = "",
-            color = "",
-            images = emptyList(),
-            location = "",
-            mileage = 0,
-            model = "",
-            price = 0.0,
-            provinces = "",
-            transmission = "",
-            type = "",
-            year = 0,
-            wheelDrive = "",
-            variant = "",
-            description = ""
-        )
+        var selectedColor: String? = null
+
+        var selectedTransmission: String? = null
+
+        var selectedBodyType: String? = null
+
+        var selectedWheelDrive: String? = null
+
+        var selectedPrice:Int? = null
+        var selectedNewOrUsed: Boolean? = null
+        var selectedMileage:Int? = null
+        var selectedDescription:String? = null
+        var selectedProvince:String? = null
+
+
+
 
         fun reset() {
             selectedBrand = null
             selectedModel = null
             selectedVariant = null
-            car = car.copy(
-                BodyType = "",
-                IsNew = false,
-                brand = "",
-                color = "",
-                images = emptyList(),
-                location = "",
-                mileage = 0,
-                model = "",
-                price = 0.0,
-                provinces = "",
-                transmission = "",
-                type = "",
-                year = 0,
-                wheelDrive = "",
-                variant = "",
-                description = ""
-            )
+
         }
     }
 }
