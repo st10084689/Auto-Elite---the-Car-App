@@ -1,9 +1,8 @@
-package com.harmless.autoelitekotlin.view.activities
+package com.harmless.autoelitekotlin.view.activities.FilterActivities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseError

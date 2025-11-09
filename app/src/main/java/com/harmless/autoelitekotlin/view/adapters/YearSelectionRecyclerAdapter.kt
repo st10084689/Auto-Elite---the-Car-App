@@ -7,7 +7,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
+
 
 class YearSelectionRecyclerAdapter(private val items: List<Int>):
     RecyclerView.Adapter<YearSelectionRecyclerAdapter.ItemViewHolder>(){

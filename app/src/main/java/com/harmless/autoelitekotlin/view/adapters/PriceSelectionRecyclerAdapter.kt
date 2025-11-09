@@ -8,7 +8,6 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.harmless.autoelitekotlin.R
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 class PriceSelectionRecyclerAdapter(private val items: List<Double>):
     RecyclerView.Adapter<PriceSelectionRecyclerAdapter.ItemViewHolder>(){

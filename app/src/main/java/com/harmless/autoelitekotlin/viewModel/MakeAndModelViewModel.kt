@@ -6,7 +6,6 @@ import com.google.firebase.database.*
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.CarModel
 import com.harmless.autoelitekotlin.model.utils.SelectedCar
-import com.harmless.autoelitekotlin.model.utils.SelectedValues
 
 interface CarBrandCallback {
     fun onCarBrandLoaded(carBrands: List<CarBrand>)
@@ -41,15 +40,6 @@ class MakeAndModelViewModel {
         carsRef.addValueEventListener(listener)
     }
 
-    /**
-     * Returns the currently loaded list of car brands.
-     */
-    fun getCarBrand(): List<CarBrand> = carBrands
-
-    /**
-     * Used to determine if a brand item should be expandable
-     * (i.e., has model data to show).
-     */
     fun isExpandable(carsBrandList: List<CarModel>): Boolean =
         carsBrandList.isNotEmpty()
 
@@ -76,7 +66,7 @@ class MakeAndModelViewModel {
         }
 
         updateList(list)
-        syncToSelectedValues() // ✅ add this
+        syncToSelectedValues()
     }
 
     fun toggleModel(brand: String, model: String, variants: List<String>) {
@@ -91,7 +81,7 @@ class MakeAndModelViewModel {
         }
 
         updateList(list)
-        syncToSelectedValues() // ✅ add this
+        syncToSelectedValues()
     }
 
     fun toggleVariant(brand: String, model: String, variant: String, allVariants: List<String>) {
@@ -115,7 +105,7 @@ class MakeAndModelViewModel {
         }
 
         updateList(list)
-        syncToSelectedValues() // ✅ add this
+        syncToSelectedValues()
     }
 
     /**

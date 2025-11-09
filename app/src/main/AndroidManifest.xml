@@ -13,31 +13,40 @@
         android:theme="@style/Theme.AutoEliteKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".view.activities.SellSelectActivity"
+            android:name=".view.activities.SellActivities.SellSelectYear"
             android:exported="false" />
         <activity
-            android:name=".view.activities.SellCarActivity"
+            android:name=".view.activities.SellActivities.SellSelectVariantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SellActivities.SellSelectModelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SellActivities.SellSelectBrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SellActivities.SellCarActivity"
             android:exported="true" />
         <activity
-            android:name=".view.activities.ColorSelection"
+            android:name=".view.activities.FilterActivities.ColorSelection"
             android:exported="false" />
         <activity
-            android:name=".view.activities.ProvinceSelection"
+            android:name=".view.activities.FilterActivities.ProvinceSelection"
             android:exported="false" />
         <activity
             android:name=".view.activities.ShowMore"
             android:exported="false" />
         <activity
-            android:name=".view.activities.PriceSelection"
+            android:name=".view.activities.FilterActivities.PriceSelection"
             android:exported="false" />
         <activity
-            android:name=".view.activities.YearSelection"
+            android:name=".view.activities.FilterActivities.YearSelection"
             android:exported="false" />
         <activity
             android:name=".view.activities.VehicleList"
             android:exported="false" />
         <activity
-            android:name=".view.activities.MakeAndModel"
+            android:name=".view.activities.FilterActivities.MakeAndModel"
             android:exported="false" />
         <activity
             android:name=".view.activities.MainActivity"

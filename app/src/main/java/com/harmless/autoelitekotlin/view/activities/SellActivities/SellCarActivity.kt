@@ -1,4 +1,4 @@
-package com.harmless.autoelitekotlin.view.activities
+package com.harmless.autoelitekotlin.view.activities.SellActivities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
