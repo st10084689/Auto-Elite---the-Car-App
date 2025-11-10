@@ -1,51 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activities.VehicleList"
-    android:clickable="true"
-    android:orientation="vertical">
-
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:overScrollMode="never">
-
-        <LinearLayout
+    android:id="@+id/main"
+    >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vehicle_list_top_banner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/car_screen_color"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/acb_FragmentBasket"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="26dp"
+        <ImageView
+            android:id="@+id/vehicle_list_cross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_dehaze_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="15dp"/>
 
-                android:text="Sort"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:itemRippleColor="@null" />
+        <TextView
+            android:id="@+id/vehicle_list_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PlaceHolder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vehicle_list_google_card_view"
+            app:layout_constraintStart_toEndOf="@+id/vehicle_list_cross"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/sora_semi_bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/vehicle_list_google_card_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="20dp"
+            android:layout_marginEnd="15dp">
+        <ImageView
+         android:id="@+id/vehicle_list_google_image"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/vehicle_list_sort_cardview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vehicle_list_top_banner">
+
+                <Spinner
+                    android:id="@+id/vehicle_list_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/sort_by_spinner"
+                    android:dropDownVerticalOffset="8dp"
+                    android:entries="@array/sort_options"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:popupBackground="@android:color/white"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/refine_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:src="@drawable/refine_button"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/vehicle_list_sort"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/vehicle_list_sort"
+                    app:layout_constraintTop_toTopOf="@+id/vehicle_list_sort" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:src="@drawable/line_svg"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vehicle_list_sort_cardview"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/CarRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                />
+
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
 
-        </LinearLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
-
-
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

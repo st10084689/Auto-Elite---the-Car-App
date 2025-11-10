@@ -8,4 +8,13 @@
     <string name="Bike">Bike</string>
     <string name="Accessories">Other</string>
     <string name="Year">Years</string>
+
+    <string-array name="sort_options">
+        <item>Sort By Default</item>
+        <item>Sort By Lowest Price</item>
+        <item>Sort By Highest Price</item>
+        <item>Sort By Lowest Date</item>
+        <item>Sort By Highest Date</item>
+    </string-array>
+
 </resources>
