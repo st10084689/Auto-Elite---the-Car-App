@@ -12,12 +12,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.databinding.ActivityVehicleListBinding
 import com.harmless.autoelitekotlin.model.Car
+import com.harmless.autoelitekotlin.model.User
 import com.harmless.autoelitekotlin.view.adapters.VehicleListReyclerAdapter
 
-class VehicleList : AppCompatActivity() {
+class VehicleListActivity : AppCompatActivity() {
 
     private var cars: MutableList<Car> = mutableListOf()
     private lateinit var binding: ActivityVehicleListBinding
@@ -46,6 +50,7 @@ class VehicleList : AppCompatActivity() {
         initRecycler()
         setupSpinner()
         initViews()
+        loadUserProfile()
     }
 
     private fun initViews(){
@@ -64,6 +69,28 @@ class VehicleList : AppCompatActivity() {
         vehicleRecycler.layoutManager = LinearLayoutManager(this)
         adapter = VehicleListReyclerAdapter(cars)
         vehicleRecycler.adapter = adapter
+    }
+    private fun loadUserProfile() {
+        val currentUser = FirebaseAuth.getInstance().currentUser ?: return
+        val uid = currentUser.uid
+
+        val userRef = FirebaseDatabase.getInstance().getReference("users").child(uid)
+        userRef.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val user = snapshot.getValue(User::class.java)
+                user?.let {
+                    // Load profile image
+                    val imageView = findViewById<ImageView>(R.id.vehicle_list_google_image)
+                    Glide.with(this)
+                        .load(it.profileImageUrl)
+                        .centerCrop()
+                        .placeholder(R.drawable.logo)
+                        .into(imageView)
+                }
+            }
+        }.addOnFailureListener {
+
+        }
     }
 
     private fun setupSpinner() {

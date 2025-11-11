@@ -24,45 +24,69 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="54dp"
-            android:layout_marginTop="60dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true">
 
+            <!-- Navigation Button -->
             <ImageButton
                 android:id="@+id/NavButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/baseline_dehaze_24"
-                />
+                 />
 
+            <!-- Welcome Text -->
             <TextView
                 android:id="@+id/welcomeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textSize="30dp"
+                android:text="Welcome"
+                android:textSize="28sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/sora_font_family"
-                android:text="Welcome"/>
+                android:fontFamily="@font/sora_font_family" />
+
+            <!-- User's Name -->
             <TextView
                 android:id="@+id/LoginUsersName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/welcomeTxt"
                 android:layout_centerHorizontal="true"
-                android:textSize="30dp"
-                android:fontFamily="@font/sora_font_family"
+                android:text="User"
+                android:textSize="22sp"
                 android:textColor="@color/white"
-                android:text="User"/>
+                android:fontFamily="@font/sora_font_family"
+                android:layout_marginTop="4dp" />
 
-            <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:background="@drawable/baseline_account_circle_24"
-                android:layout_alignParentEnd="true"/>
+            <!-- Profile Image (Circular Card) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profileCard"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="25dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="false">
+
+                <ImageView
+                    android:id="@+id/main_login_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_account_circle_24"
+                    android:background="@android:color/transparent" />
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
+
         <RelativeLayout
             android:padding="5dp"
             android:id="@+id/main_content_relative"

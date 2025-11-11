@@ -20,7 +20,7 @@ import com.harmless.autoelitekotlin.model.Car
 import com.harmless.autoelitekotlin.view.activities.FilterActivities.MakeAndModel
 import com.harmless.autoelitekotlin.view.activities.FilterActivities.PriceSelection
 import com.harmless.autoelitekotlin.view.activities.ShowMore
-import com.harmless.autoelitekotlin.view.activities.VehicleList
+import com.harmless.autoelitekotlin.view.activities.VehicleListActivity
 import com.harmless.autoelitekotlin.view.activities.FilterActivities.YearSelection
 import com.harmless.autoelitekotlin.view.adapters.SpinnerAdapter
 import com.harmless.autoelitekotlin.viewModel.CarViewModel
@@ -160,7 +160,7 @@ class CarFragment : Fragment(), CarViewModel.CarsCallback {
         if (cars.isEmpty()) {
             Toast.makeText(requireContext(), "No cars", Toast.LENGTH_SHORT).show()
         } else {
-            val toCarList = Intent(requireContext(), VehicleList::class.java)
+            val toCarList = Intent(requireContext(), VehicleListActivity::class.java)
             toCarList.putExtra("selectedCars", ArrayList(cars))
             startActivity(toCarList)
         }

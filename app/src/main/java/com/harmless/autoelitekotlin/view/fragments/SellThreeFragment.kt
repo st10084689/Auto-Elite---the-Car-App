@@ -12,12 +12,17 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.databinding.FragmentSellThreeBinding
 import com.harmless.autoelitekotlin.databinding.FragmentSellTwoBinding
 import com.harmless.autoelitekotlin.model.Car
+import com.harmless.autoelitekotlin.model.User
 import com.harmless.autoelitekotlin.view.activities.MainActivity
 import com.harmless.autoelitekotlin.view.activities.SellActivities.SellCarActivity
 import com.harmless.autoelitekotlin.viewModel.SellCarViewModel.SellSession.selectedBodyType
@@ -46,37 +51,44 @@ class SellThreeFragment : Fragment() {
     private lateinit var leftImage: ImageView
     private lateinit var rightImage: ImageView
     private lateinit var rearImage: ImageView
-    private lateinit var additionalImage: ImageView
 
     private lateinit var frontImageCardView: CardView
     private lateinit var leftImageCardView: CardView
     private lateinit var rightImageCardView: CardView
     private lateinit var rearImageCardView: CardView
 
-
     private val selectedImages = mutableListOf<Uri>()
     private lateinit var pickImageLauncher: ActivityResultLauncher<String>
     private var currentImageTarget: ImageView? = null
 
+    private lateinit var database: FirebaseDatabase
+    private lateinit var userRef: DatabaseReference
+    private lateinit var storageRef: StorageReference
+    private lateinit var firebaseUser: FirebaseUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            if (uri != null && currentImageTarget != null) {
-                // Display in the ImageView
-                currentImageTarget?.setImageURI(uri)
+        database = FirebaseDatabase.getInstance()
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+            ?: throw IllegalStateException("User not logged in")
 
-                // Save in the list
-                selectedImages.add(uri)
+        userRef = database.getReference("users").child(firebaseUser.uid)
+        storageRef = FirebaseStorage.getInstance().reference.child("car_images")
+
+        pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                if (uri != null && currentImageTarget != null) {
+                    currentImageTarget?.setImageURI(uri)
+                    selectedImages.add(uri)
+                }
             }
-        }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSellThreeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -88,7 +100,7 @@ class SellThreeFragment : Fragment() {
         navigationButtons()
     }
 
-    private fun initViews(){
+    private fun initViews() {
         backButton = binding.sellOneBackButton
         continueButton = binding.sellOneContinueButton
 
@@ -104,63 +116,66 @@ class SellThreeFragment : Fragment() {
     }
 
     private fun setUpListeners() {
-        // Front image
         frontImageCardView.setOnClickListener {
             currentImageTarget = frontImage
             pickImageLauncher.launch("image/*")
         }
 
-        // Left image
         leftImageCardView.setOnClickListener {
             currentImageTarget = leftImage
             pickImageLauncher.launch("image/*")
         }
 
-        // Right image
         rightImageCardView.setOnClickListener {
             currentImageTarget = rightImage
             pickImageLauncher.launch("image/*")
         }
 
-        // Rear image
         rearImageCardView.setOnClickListener {
             currentImageTarget = rearImage
             pickImageLauncher.launch("image/*")
         }
     }
 
-    private fun navigationButtons(){
-            backButton.setOnClickListener {
-                (requireActivity() as SellCarActivity).goToPreviousPage()
-            }
+    private fun navigationButtons() {
+        backButton.setOnClickListener {
+            (requireActivity() as SellCarActivity).goToPreviousPage()
+        }
 
         continueButton.setOnClickListener {
-            val databaseRef = FirebaseDatabase.getInstance().getReference("cars")
-            val storageRef = FirebaseStorage.getInstance().reference.child("car_images")
-
-            // Upload images first
-            val imageUris: List<Uri> = selectedImages  // must come from your image picker
-            val downloadUrls = mutableListOf<String>()
-
-            if (imageUris.isEmpty()) {
+            if (selectedImages.isEmpty()) {
                 Toast.makeText(requireContext(), "Please select at least one image", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            uploadUserAndCar()
+        }
+    }
 
-            imageUris.mapIndexed { index, uri ->
+    private fun uploadUserAndCar() {
+        val carsRef = database.getReference("cars")
+
+        // ✅ Get current user data from Realtime Database
+        userRef.get().addOnSuccessListener { snapshot ->
+            if (!snapshot.exists()) {
+                Toast.makeText(requireContext(), "User profile not found!", Toast.LENGTH_SHORT).show()
+                return@addOnSuccessListener
+            }
+
+            val currentUser = snapshot.getValue(User::class.java) ?: User()
+            val downloadUrls = mutableListOf<String>()
+
+            selectedImages.forEachIndexed { index, uri ->
                 val fileRef = storageRef.child("${System.currentTimeMillis()}_$index.jpg")
+
                 fileRef.putFile(uri).continueWithTask { task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let { throw it }
-                    }
+                    if (!task.isSuccessful) task.exception?.let { throw it }
                     fileRef.downloadUrl
                 }.addOnSuccessListener { downloadUri ->
                     downloadUrls.add(downloadUri.toString())
 
-                    // Once all images uploaded, upload car
-                    if (downloadUrls.size == imageUris.size) {
-
-                        val carId = databaseRef.push().key ?: return@addOnSuccessListener
+                    // ✅ When all images uploaded
+                    if (downloadUrls.size == selectedImages.size) {
+                        val carId = carsRef.push().key ?: return@addOnSuccessListener
 
                         val car = Car(
                             BodyType = selectedBodyType ?: "",
@@ -178,25 +193,34 @@ class SellThreeFragment : Fragment() {
                             year = selectedYear ?: 0,
                             wheelDrive = selectedWheelDrive ?: "",
                             variant = selectedVariant ?: "",
-                            description = selectedDescription ?: ""
+                            description = selectedDescription ?: "",
+                            user = currentUser
                         )
 
-                        databaseRef.child(carId).setValue(car).addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Car uploaded successfully!", Toast.LENGTH_SHORT).show()
+                        carsRef.child(carId).setValue(car)
+                            .addOnSuccessListener {
+                                Toast.makeText(requireContext(), "Car uploaded successfully!", Toast.LENGTH_SHORT).show()
 
-                            // ✅ Navigate back to MainActivity
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
-                            requireActivity().finish() // optional, to close current fragment/activity
-
-                        }.addOnFailureListener { e ->
-                            Toast.makeText(requireContext(), "Failed to upload car: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                                val intent = Intent(requireContext(), MainActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                                requireActivity().finish()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(requireContext(), "Failed to upload car: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
                     }
                 }.addOnFailureListener { e ->
                     Toast.makeText(requireContext(), "Image upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
-        }}
+        }.addOnFailureListener { e ->
+            Toast.makeText(requireContext(), "Failed to get user: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -19,49 +19,28 @@ data class Car(
     var year: Int,
     var wheelDrive: String,
     var variant: String,
-    var description: String
+    var description: String,
+    var user: User
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
+        parcel.readString() ?: "",
         parcel.readByte() != 0.toByte(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.createStringArrayList()!!,
-        parcel.readString()!!,
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.createStringArrayList() ?: emptyList(),
+        parcel.readString() ?: "",
         parcel.readInt(),
-        parcel.readString()!!,
+        parcel.readString() ?: "",
         parcel.readDouble(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
         parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
-    )
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    constructor() : this(
-        "",
-        false,
-        "",
-        "",
-        emptyList(),
-        "",
-        0,
-        "",
-        0.0,
-        "",
-        "",
-        "",
-        0,
-        "",
-        "",
-        ""
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readParcelable(User::class.java.classLoader) ?: User()
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -81,15 +60,33 @@ data class Car(
         dest.writeString(wheelDrive)
         dest.writeString(variant)
         dest.writeString(description)
+        dest.writeParcelable(user, flags)
     }
 
-    companion object CREATOR : Parcelable.Creator<Car> {
-        override fun createFromParcel(parcel: Parcel): Car {
-            return Car(parcel)
-        }
+    override fun describeContents() = 0
 
-        override fun newArray(size: Int): Array<Car?> {
-            return arrayOfNulls(size)
-        }
+    constructor() : this(
+        "",
+        false,
+        "",
+        "",
+        emptyList(),
+        "",
+        0,
+        "",
+        0.0,
+        "",
+        "",
+        "",
+        0,
+        "",
+        "",
+        "",
+        User()
+    )
+
+    companion object CREATOR : Parcelable.Creator<Car> {
+        override fun createFromParcel(parcel: Parcel) = Car(parcel)
+        override fun newArray(size: Int): Array<Car?> = arrayOfNulls(size)
     }
 }

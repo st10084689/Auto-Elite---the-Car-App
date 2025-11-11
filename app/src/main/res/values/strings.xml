@@ -8,6 +8,8 @@
     <string name="Bike">Bike</string>
     <string name="Accessories">Other</string>
     <string name="Year">Years</string>
+    <string name="default_web_client_id">387211541062-4uclvo6mogk0kplsradnpsna2b7i632n.apps.googleusercontent.com</string>
+
 
     <string-array name="sort_options">
         <item>Sort By Default</item>

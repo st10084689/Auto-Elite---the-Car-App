@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.harmless.autoelitekotlin.model.Car
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.CarModel
+import com.harmless.autoelitekotlin.model.User
 
 class SellCarViewModel : ViewModel() {
     private val carBrands = mutableListOf<CarBrand>()
@@ -30,9 +31,16 @@ class SellCarViewModel : ViewModel() {
             year = 0,
             wheelDrive = "",
             variant = "",
-            description = ""
+            description = "",
+            user = User(
+                uid = "",
+                name = "",
+                email = "",
+                profileImageUrl = ""
+            )
         )
     )
+
     val sellCarObject: LiveData<Car> = _sellCarObject
 
     // ----------------- Firebase Brand Loading -----------------

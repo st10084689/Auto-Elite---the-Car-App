@@ -5,14 +5,20 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.harmless.autoelitekotlin.R
+import com.harmless.autoelitekotlin.model.User
 import com.harmless.autoelitekotlin.view.adapters.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
@@ -29,15 +35,43 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
     }
 
     fun init(){
-        //sets up the tab layout
 
-        //setting the navigation layout
         drawerLayout = findViewById(R.id.my_drawer_layout)
         navigationView = findViewById(R.id.navigation_menu)
         navigationButton = findViewById(R.id.NavButton)
 
         setFragment()
+        loadUserProfile()
 
+    }
+
+    private fun loadUserProfile() {
+        val currentUser = FirebaseAuth.getInstance().currentUser ?: return
+        val uid = currentUser.uid
+
+        val userRef = FirebaseDatabase.getInstance().getReference("users").child(uid)
+        userRef.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val user = snapshot.getValue(User::class.java)
+                user?.let {
+
+                    val imageView = findViewById<ImageView>(R.id.main_login_image)
+                    Glide.with(this)
+                        .load(it.profileImageUrl)
+                        .placeholder(R.drawable.logo)
+                        .into(imageView)
+
+
+                    val nameTextView = findViewById<TextView>(R.id.LoginUsersName)
+                    nameTextView.text = it.name
+                }
+            } else {
+
+                Toast.makeText(this, "User profile not found", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to load user profile: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setFragment(){
