@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.harmless.autoelitekotlin.model.Car
 import com.harmless.autoelitekotlin.model.CarBrand
 import com.harmless.autoelitekotlin.model.CarModel
+import com.harmless.autoelitekotlin.model.User
 
 class SellCarViewModel : ViewModel() {
     private val carBrands = mutableListOf<CarBrand>()
@@ -30,9 +31,16 @@ class SellCarViewModel : ViewModel() {
             year = 0,
             wheelDrive = "",
             variant = "",
-            description = ""
+            description = "",
+            user = User(
+                uid = "",
+                name = "",
+                email = "",
+                profileImageUrl = ""
+            )
         )
     )
+
     val sellCarObject: LiveData<Car> = _sellCarObject
 
     // ----------------- Firebase Brand Loading -----------------
@@ -110,47 +118,28 @@ class SellCarViewModel : ViewModel() {
 
         var selectedYear: Int? = null
 
-        var car: Car = Car(
-            BodyType = "",
-            IsNew = false,
-            brand = "",
-            color = "",
-            images = emptyList(),
-            location = "",
-            mileage = 0,
-            model = "",
-            price = 0.0,
-            provinces = "",
-            transmission = "",
-            type = "",
-            year = 0,
-            wheelDrive = "",
-            variant = "",
-            description = ""
-        )
+        var selectedColor: String? = null
+
+        var selectedTransmission: String? = null
+
+        var selectedBodyType: String? = null
+
+        var selectedWheelDrive: String? = null
+
+        var selectedPrice:Int? = null
+        var selectedNewOrUsed: Boolean? = null
+        var selectedMileage:Int? = null
+        var selectedDescription:String? = null
+        var selectedProvince:String? = null
+
+
+
 
         fun reset() {
             selectedBrand = null
             selectedModel = null
             selectedVariant = null
-            car = car.copy(
-                BodyType = "",
-                IsNew = false,
-                brand = "",
-                color = "",
-                images = emptyList(),
-                location = "",
-                mileage = 0,
-                model = "",
-                price = 0.0,
-                provinces = "",
-                transmission = "",
-                type = "",
-                year = 0,
-                wheelDrive = "",
-                variant = "",
-                description = ""
-            )
+
         }
     }
 }

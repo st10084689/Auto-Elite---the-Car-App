@@ -13,6 +13,30 @@
         android:theme="@style/Theme.AutoEliteKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.UserDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SplashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.activities.LoginAcitivties.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.LoginAcitivties.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CarListingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.SellActivities.SellSelectBodyTypeActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.SellActivities.SellSelectYear"
             android:exported="false" />
         <activity
@@ -43,20 +67,14 @@
             android:name=".view.activities.FilterActivities.YearSelection"
             android:exported="false" />
         <activity
-            android:name=".view.activities.VehicleList"
+            android:name=".view.activities.VehicleListActivity"
             android:exported="false" />
         <activity
             android:name=".view.activities.FilterActivities.MakeAndModel"
             android:exported="false" />
         <activity
             android:name=".view.activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

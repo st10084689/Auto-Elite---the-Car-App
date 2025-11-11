@@ -14,4 +14,6 @@
     <color name="bike_secondary_color">#3A7103</color>
     <color name="accessories_secondary_color">#E9A800</color>
     <color name="spinner_color">#565656</color>
+    <color name="light_extra_grey">#EEEEEE</color>
+    <color name="light_listing_grey">#D9D9D9</color>
 </resources>

@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.harmless.autoelitekotlin.R
 import com.harmless.autoelitekotlin.databinding.ActivitySellCarBinding
 import com.harmless.autoelitekotlin.view.adapters.SellCarViewPagerAdapter
@@ -12,6 +13,8 @@ import com.harmless.autoelitekotlin.view.adapters.SellCarViewPagerAdapter
 class SellCarActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySellCarBinding
+
+    lateinit var viewPager: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,11 +29,19 @@ class SellCarActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        val viewPager = binding.sellCarViewpager
+         viewPager = binding.sellCarViewpager
 
 
         val adapter = SellCarViewPagerAdapter(this)
         viewPager.adapter = adapter
 
+    }
+
+    fun goToNextPage() {
+        viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+    }
+
+    fun goToPreviousPage() {
+        viewPager.setCurrentItem(viewPager.currentItem - 1, true)
     }
 }
